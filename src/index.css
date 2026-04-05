@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+
+  --color-on-secondary-fixed-variant: #39485c;
+  --color-on-secondary-fixed: #0d1c2e;
+  --color-surface-container-low: #f1f4f6;
+  --color-on-tertiary-fixed: #00201d;
+  --color-surface-container-highest: #e0e3e5;
+  --color-tertiary-container: #00837a;
+  --color-on-primary-fixed: #001c3a;
+  --color-tertiary-fixed-dim: #5adace;
+  --color-on-secondary: #ffffff;
+  --color-background: #f7fafc;
+  --color-tertiary-fixed: #79f7ea;
+  --color-surface: #f7fafc;
+  --color-surface-dim: #d7dadc;
+  --color-tertiary: #006860;
+  --color-on-surface-variant: #414751;
+  --color-on-tertiary-container: #f3fffc;
+  --color-on-background: #181c1e;
+  --color-primary-fixed-dim: #a5c8ff;
+  --color-surface-container: #ebeef0;
+  --color-on-error-container: #93000a;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-tertiary-fixed-variant: #00504a;
+  --color-surface-tint: #3b6090;
+  --color-outline: #717783;
+  --color-primary: #385d8e;
+  --color-outline-variant: #c1c7d3;
+  --color-secondary-container: #d1e1fa;
+  --color-surface-variant: #e0e3e5;
+  --color-error-container: #ffdad6;
+  --color-secondary-fixed: #d4e4fc;
+  --color-error: #ba1a1a;
+  --color-on-primary: #ffffff;
+  --color-on-error: #ffffff;
+  --color-secondary: #515f74;
+  --color-primary-container: #5276a8;
+  --color-on-surface: #181c1e;
+  --color-on-primary-container: #fefcff;
+  --color-surface-bright: #f7fafc;
+  --color-primary-fixed: #d4e3ff;
+  --color-surface-container-high: #e5e9eb;
+  --color-on-secondary-container: #556479;
+  --color-secondary-fixed-dim: #b8c8e0;
+  --color-on-primary-fixed-variant: #204877;
+  --color-on-tertiary: #ffffff;
+  --color-inverse-primary: #a5c8ff;
+  --color-inverse-surface: #2d3133;
+  --color-inverse-on-surface: #eef1f3;
+}
+
+body { font-family: 'Inter', sans-serif; background-color: #f7fafc; color: #181c1e; }
+h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+.glass-effect { backdrop-filter: blur(24px); }
+.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+.primary-gradient { background: linear-gradient(135deg, #385d8e 0%, #5276a8 100%); }

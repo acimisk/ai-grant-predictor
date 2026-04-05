@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cognitive Canvas - AI-Powered Academic Rigor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#39485c",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "surface-container-low": "#f1f4f6",
+                    "on-tertiary-fixed": "#00201d",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-container": "#00837a",
+                    "on-primary-fixed": "#001c3a",
+                    "tertiary-fixed-dim": "#5adace",
+                    "on-secondary": "#ffffff",
+                    "background": "#f7fafc",
+                    "tertiary-fixed": "#79f7ea",
+                    "surface": "#f7fafc",
+                    "surface-dim": "#d7dadc",
+                    "tertiary": "#006860",
+                    "on-surface-variant": "#414751",
+                    "on-tertiary-container": "#f3fffc",
+                    "on-background": "#181c1e",
+                    "primary-fixed-dim": "#a5c8ff",
+                    "surface-container": "#ebeef0",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#00504a",
+                    "surface-tint": "#3b6090",
+                    "outline": "#717783",
+                    "primary": "#385d8e",
+                    "outline-variant": "#c1c7d3",
+                    "secondary-container": "#d1e1fa",
+                    "surface-variant": "#e0e3e5",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d4e4fc",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary": "#515f74",
+                    "primary-container": "#5276a8",
+                    "on-surface": "#181c1e",
+                    "on-primary-container": "#fefcff",
+                    "surface-bright": "#f7fafc",
+                    "primary-fixed": "#d4e3ff",
+                    "surface-container-high": "#e5e9eb",
+                    "on-secondary-container": "#556479",
+                    "secondary-fixed-dim": "#b8c8e0",
+                    "on-primary-fixed-variant": "#204877",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#a5c8ff",
+                    "inverse-surface": "#2d3133",
+                    "inverse-on-surface": "#eef1f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; color: #181c1e; }
+        h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+        .glass-effect { backdrop-filter: blur(24px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .primary-gradient { background: linear-gradient(135deg, #385d8e 0%, #5276a8 100%); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl docked full-width top-0 sticky z-50 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-full mx-auto">
+<div class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Cognitive Canvas</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-blue-700 dark:text-blue-400 font-semibold border-b-2 border-blue-700" href="#">Platform</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-all" href="#">KOSGEB Insights</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-all" href="#">TUBITAK Metrics</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 transition-all" href="#">Methodology</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 dark:text-slate-400 hover:bg-slate-100/50 px-4 py-2 rounded-xl transition-all scale-95 duration-200 ease-in-out">Sign In</button>
+<button class="primary-gradient text-white px-6 py-2.5 rounded-xl font-semibold scale-95 duration-200 ease-in-out">Create Account</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative px-8 pt-20 pb-32 overflow-hidden">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold mb-6">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        AI-POWERED ACADEMIC RIGOR
+                    </div>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-on-background leading-tight mb-6">
+                        Revolutionizing Grant Evaluations with <span class="text-primary">LLM &amp; RAG</span>
+</h1>
+<p class="text-xl text-secondary leading-relaxed mb-10 max-w-2xl">
+                        Accelerating KOSGEB and TUBITAK evaluation processes by 60% with AI-driven objectivity. Transform dense academic proposals into actionable insights.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="primary-gradient text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl shadow-primary/20 hover:scale-105 transition-transform">
+                            Get Started with Your Proposal
+                        </button>
+<button class="bg-surface-container-highest text-on-surface px-8 py-4 rounded-xl text-lg font-semibold hover:bg-surface-container-high transition-colors">
+                            View Methodology
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="bg-surface-container-low rounded-[2rem] p-4 relative overflow-hidden">
+<img class="rounded-[1.5rem] w-full shadow-2xl" data-alt="Futuristic digital dashboard showing abstract data visualization nodes and neural network patterns in soft blue and mint green tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuoUODLoulwdCP02JwSG-PCGM5pua4JHZ8QG5o-9yQdEni-5iAhshRcVtnV_3ZAiH-5QOwdzl8YjW-9KhH8WsG4My3JNrjmTgFoJr67Cf5VPo6ejvtuJrgmJNwK89SA0BiLsQQ1MLfZq-cXL4acuqjIHyJaEqKQZYJb40vemawLI8SjkBlFrKuNH513J8FG1TCMfc_o2-IKawbmhsw9uPHQigl9WXy2BOaRlw1mN5kpDgwMNh_-3tOrQsyT3ixLNOgoCP4wfbmmg1V"/>
+<div class="absolute bottom-10 -left-6 bg-surface-container-lowest p-6 rounded-2xl shadow-xl max-w-[240px]">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-bold text-sm">Similarity Detected</span>
+</div>
+<div class="h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[88%]"></div>
+</div>
+<p class="text-[10px] mt-2 text-secondary">Cross-referenced with 14.2M academic papers.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decorative Elements -->
+<div class="absolute top-0 right-0 -z-10 w-1/2 h-full bg-gradient-to-l from-secondary-container/20 to-transparent blur-3xl opacity-50"></div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="px-8 py-24 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-lowest p-10 rounded-[2rem] flex flex-col justify-between group hover:bg-primary-fixed transition-colors duration-500">
+<div>
+<span class="text-6xl font-black text-primary mb-4 block">60%</span>
+<h3 class="text-xl font-bold text-on-surface mb-2">Time Reduction</h3>
+</div>
+<p class="text-secondary group-hover:text-on-primary-fixed-variant">Automated screening and semantic analysis reduces manual review cycles significantly.</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-[2rem] flex flex-col justify-between group hover:bg-tertiary-fixed transition-colors duration-500">
+<div>
+<span class="text-6xl font-black text-tertiary mb-4 block">94.2%</span>
+<h3 class="text-xl font-bold text-on-surface mb-2">High Accuracy Metrics</h3>
+</div>
+<p class="text-secondary group-hover:text-on-tertiary-fixed-variant">RAG-augmented validation ensures that AI interpretations align with official grant criteria.</p>
+</div>
+<div class="bg-surface-container-lowest p-10 rounded-[2rem] flex flex-col justify-between group hover:bg-secondary-fixed transition-colors duration-500">
+<div>
+<span class="material-symbols-outlined text-6xl text-secondary mb-4 block">balance</span>
+<h3 class="text-xl font-bold text-on-surface mb-2">AI-Driven Consistency</h3>
+</div>
+<p class="text-secondary group-hover:text-on-secondary-fixed-variant">Removing human bias through standardized LLM scoring rubrics and contextual retrieval.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section (Asymmetric Editorial Layout) -->
+<section class="px-8 py-32 overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="mb-24 text-center max-w-3xl mx-auto">
+<h2 class="text-4xl md:text-5xl font-extrabold mb-6">Designed for Institutional Rigor</h2>
+<p class="text-lg text-secondary">The Cognitive Canvas isn't just a tool; it's a digital curator that interprets academic proposals with deep contextual understanding.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="bg-tertiary-fixed/20 p-8 rounded-[2.5rem]">
+<img class="rounded-[2rem] shadow-lg" data-alt="Macro photography of high-tech circuit board with glowing neon cyan pathways symbolizing complex AI neural connections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYgW6EGK4PCmBDLAKdEABGm7nKHY8R6HkL4VxCyubk1urwzYXbU3Ke9kIPkBFIqnvPKFe6rgfn-oEG0PkMYvqxPsO91tkwNy7sYzpuAxFcCrJItCkqUnXwCC4cqTLD_y4zKiX6JSJOgoTTaRmEswiM2QAzrD83a-CvXnmdwJx8f5ixN1r44EbDo1ZjH8dBkb2rNl6sl8vWYc_A2qN_zEFjDGHxGSv3nERPvwkMDAspbirS2Z_aKmf6tRxzIj1GI7znwVlSaTDF0FCI"/>
+</div>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2">
+<span class="text-tertiary font-bold tracking-widest uppercase text-sm mb-4 block">Architectural Advantage</span>
+<h3 class="text-3xl font-bold mb-6">RAG Architecture &amp; Semantic Depth</h3>
+<p class="text-lg text-secondary mb-8 leading-relaxed">
+                            Unlike generic LLMs, our Retrieval-Augmented Generation (RAG) pipeline connects specifically to KOSGEB and TUBITAK knowledge bases. This ensures every evaluation is grounded in current regulatory frameworks and historical grant data.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-medium">Context-aware citation of academic sources</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-1" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-medium">Real-time matching with funder priorities</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+<div class="lg:col-span-7">
+<span class="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Cognitive Logic</span>
+<h3 class="text-3xl font-bold mb-6">Advanced Similarity Detection</h3>
+<p class="text-lg text-secondary mb-8 leading-relaxed">
+                            Protecting academic integrity is paramount. Cognitive Canvas goes beyond simple keyword matching, using vector embeddings to identify conceptual overlap and project similarities across multiple languages and disciplines.
+                        </p>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<span class="material-symbols-outlined text-primary mb-2">language</span>
+<div class="font-bold">Multilingual Sync</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-2xl">
+<span class="material-symbols-outlined text-primary mb-2">hub</span>
+<div class="font-bold">Cross-Project Graph</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="bg-primary-fixed/20 p-8 rounded-[2.5rem] rotate-3">
+<img class="rounded-[2rem] shadow-lg -rotate-3" data-alt="Artistic satellite view of earth at night with glowing data connectivity lines spanning across continents in deep blue hues" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwio6Tg3U3T-unT2ET_3y1N3eaPNkNbauLf72DOavJEAvCXk_HXIlV61laazaxwCNXz2Q_kM7eIoqNDn6o8GFJpyx0jhdD-CQWt9Wpqq5Wlhh3-GdQDSlDGH7pdV_3qKJFGnFaVRWnwecAxfrOfCBirO6nOPdZrpLqwtIq-3tF6D7XhACOkDIwwRxJri7nslZuglaHwfQDqR2mLwfIN-3BZnwUWRCa2MJfDkMc9lp_JEvAwU_0hAai-Ty0fJMM0DwplSdoorT3Cftf"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="px-8 py-24">
+<div class="max-w-7xl mx-auto">
+<div class="primary-gradient rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
+<div class="relative z-10">
+<h2 class="text-white text-4xl md:text-6xl font-extrabold mb-8">Ready to Elevate Your Academic Impact?</h2>
+<p class="text-primary-fixed text-xl mb-12 max-w-2xl mx-auto">
+                            Join the leading institutions using Cognitive Canvas to streamline grant workflows and ensure the highest standards of evaluation.
+                        </p>
+<div class="flex flex-col md:flex-row justify-center gap-6">
+<button class="bg-white text-primary px-10 py-5 rounded-2xl text-xl font-black shadow-2xl hover:bg-surface-container-lowest transition-all">
+                                Get Started with Your Proposal
+                            </button>
+<button class="border-2 border-white/30 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/10 transition-all">
+                                Request a Demo
+                            </button>
+</div>
+</div>
+<!-- Decorative Orbs -->
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 w-full py-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 gap-6 max-w-7xl mx-auto">
+<div class="flex flex-col items-center md:items-start">
+<div class="text-md font-bold text-slate-800 dark:text-slate-200 mb-2">Cognitive Canvas</div>
+<p class="text-slate-500 text-sm font-medium">© 2024 Cognitive Canvas. AI-Powered Academic Rigor.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-slate-500 text-sm font-medium hover:underline decoration-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-slate-500 text-sm font-medium hover:underline decoration-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-slate-500 text-sm font-medium hover:underline decoration-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">RAG Documentation</a>
+<a class="text-slate-500 text-sm font-medium hover:underline decoration-blue-500 transition-opacity opacity-80 hover:opacity-100" href="#">Contact Support</a>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">hub</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors">terminal</span>
+</div>
+</div>
+</footer>
+</body></html>
