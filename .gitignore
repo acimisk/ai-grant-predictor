@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 .env
 __pycache__/
 .venv/
 data/*.json
 *.json
+=======
+venv/
+__pycache__/
+.env
+>>>>>>> 8086034 (feat: Llama-3 ve FastAPI ile Karar Destek Sistemi backend altyapısı eklendi)
