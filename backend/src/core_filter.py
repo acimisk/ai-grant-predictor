@@ -1,6 +1,6 @@
 import os
-from dotenv import load_dotenv # Bunu ekle
-load_dotenv() # Bunu da ekle, .env dosyasını sisteme yükler
+from dotenv import load_doten
+load_dotenv()
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 
@@ -70,7 +70,7 @@ def run_core_filter(new_project_text):
         print("[SONUÇ] BAŞVURU REDDEDİLDİ. Çekirdek Filtre'ye takıldı.")
 
 if __name__ == "__main__":
-    # Sisteme gelen yeni (ve daha önce veritabanındaki bir projeye çok benzeyen) sahte başvuru
+    
     test_application = """
 Proje Başlığı: Gerçekliği Şüpheli İnançlar (Komplo, Paranormal Ve Sahte Bilim İnançları) Zaman İçinde Nasıl Değişiyor? Yordayıcıların Ve Düzenleyicilerinin Boylamsal Olarak İncelenmesi
 Anahtar Kelimeler: eğitim, kişilik, biliş, sosyal, komplo, sahte bilim, Gerçekliği şüpheli inançlar, paranormal
