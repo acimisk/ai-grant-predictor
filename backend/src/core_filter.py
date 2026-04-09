@@ -1,5 +1,5 @@
 import os
-from dotenv import load_doten
+from dotenv import load_dotenv
 load_dotenv()
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
