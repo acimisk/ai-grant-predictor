@@ -6,8 +6,7 @@ from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
 
 # --- Sistem Sabitleri ---
-METADATA_FILE = "trdizin_metadata.json"
-# Arkadaşından alacağın Connection String buraya gelecek
+METADATA_FILE = os.getenv("METADATA_FILE")
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
