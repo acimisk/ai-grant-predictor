@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+load_dotenv()
 import json
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
@@ -5,9 +8,9 @@ from sentence_transformers import SentenceTransformer
 # --- Sistem Sabitleri ---
 METADATA_FILE = "trdizin_metadata.json"
 # Arkadaşından alacağın Connection String buraya gelecek
-MONGO_URI = "mongodb+srv://acimisk:3132758k@tubitak.bwkixcm.mongodb.net/yga_rag_db?retryWrites=true&w=majority"
-DB_NAME = "yga_rag_db"
-COLLECTION_NAME = "tubitak_projects"
+MONGO_URI = os.getenv("MONGO URI")
+DB_NAME = os.getenv("DB_NAME")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 def build_mongo_vector_db():
     print("[SİSTEM] MongoDB Atlas bağlantısı kuruluyor...")
