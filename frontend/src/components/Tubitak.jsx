@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Tubitak = () => {
+  const [showStats, setShowStats] = useState(false);
   return (
     <div className="bg-surface min-h-screen p-8 pt-28 border-l-[16px] border-primary">
       <div className="max-w-7xl mx-auto">
@@ -15,10 +16,39 @@ const Tubitak = () => {
             AR-GE & İNOVASYON
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-on-background mb-4">TÜBİTAK Metrikleri</h1>
-          <p className="text-xl text-secondary max-w-2xl">
+          <p className="text-xl text-secondary max-w-2xl mb-8">
             1501, 1507 ve 1001 projelerinin onay trendleri, inovasyon skorları ve akademik kaynak yoğunluğunu yansıtan canlı istatistik grafikleri.
           </p>
+          <button 
+            onClick={() => setShowStats(!showStats)}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-colors shadow-lg hover:shadow-xl cursor-pointer"
+          >
+            <span className="material-symbols-outlined">{showStats ? "visibility_off" : "analytics"}</span>
+            {showStats ? "Canlı İstatistikleri Gizle" : "Canlı İstatistikleri Görüntüle"}
+          </button>
         </div>
+
+        {/* Embedded Streamlit Iframe */}
+        {showStats && (
+          <div className="mb-16 bg-surface-container-lowest rounded-[2rem] p-4 shadow-[0_12px_40px_rgba(24,28,30,0.06)] border border-outline-variant/15 w-full h-[800px] overflow-hidden">
+            <div className="flex items-center justify-between px-4 pb-4 border-b border-outline-variant/15 mb-4">
+               <div className="flex items-center gap-2">
+                 <span className="material-symbols-outlined text-primary">data_usage</span>
+                 <h3 className="font-bold text-on-surface">Canlı Analiz Modülü (Streamlit Sunucusu)</h3>
+               </div>
+               <div className="flex gap-2">
+                 <div className="w-3 h-3 rounded-full bg-error"></div>
+                 <div className="w-3 h-3 rounded-full bg-tertiary"></div>
+                 <div className="w-3 h-3 rounded-full bg-primary"></div>
+               </div>
+            </div>
+            <iframe 
+              src="http://localhost:8501/?embed=true" 
+              className="w-full h-[calc(100%-60px)] rounded-xl border-none"
+              title="Streamlit Canlı İstatistikler"
+            />
+          </div>
+        )}
 
         {/* Asymmetrical Masonry-like Layout for Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
