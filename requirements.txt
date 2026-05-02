@@ -1,0 +1,21 @@
+# --- Core API & Web ---
+fastapi==0.110.0
+uvicorn==0.28.0
+pydantic==2.6.4
+requests==2.31.0
+
+# --- Database & Vector Search ---
+pymongo==4.6.2
+python-dotenv==1.0.1
+
+# --- NLP & Machine Learning ---
+sentence-transformers==2.5.1
+torch==2.2.1
+transformers==4.38.2
+numpy==1.26.4
+
+# --- Data Processing ---
+PyPDF2==3.0.1
+
+# --- LLM Integration ---
+ollama==0.1.7
