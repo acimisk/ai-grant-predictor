@@ -4,3 +4,4 @@ __pycache__/
 data/*.json
 *.json
 venv/
+node_modules/

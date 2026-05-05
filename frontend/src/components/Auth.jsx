@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Auth = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const defaultTab = location.pathname.includes('register') ? 'register' : 'login';
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [focusedInput, setFocusedInput] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Giriş / Kayıt simülasyonu sonrasında platforma yönlendirme
+    navigate('/platform');
+  };
 
   return (
     <div className="flex min-h-screen bg-surface-container-low">
@@ -19,37 +27,46 @@ const Auth = () => {
             Ana Sayfaya Dön
           </Link>
 
-          <h1 className="text-4xl font-extrabold text-on-background mb-2">Cognitive Canvas</h1>
+          <h1 className="text-4xl font-extrabold text-on-background mb-2">GrantInsight AI</h1>
           <p className="text-lg text-secondary mb-8">
             Akademik değerlendirme platformuna hoş geldiniz.
           </p>
 
-          {/* Tab Switcher */}
-          <div className="flex gap-2 mb-8 bg-surface-container-high p-1 rounded-2xl w-max">
-            <button 
-              onClick={() => setActiveTab('login')}
-              className={`px-6 py-2.5 rounded-xl font-bold transition-all ${
-                activeTab === 'login' 
-                  ? 'bg-surface-container-lowest shadow-sm text-primary' 
-                  : 'text-secondary hover:text-on-surface'
-              }`}
-            >
-              Giriş Yap
-            </button>
-            <button 
-              onClick={() => setActiveTab('register')}
-              className={`px-6 py-2.5 rounded-xl font-bold transition-all ${
-                activeTab === 'register' 
-                  ? 'bg-surface-container-lowest shadow-sm text-primary' 
-                  : 'text-secondary hover:text-on-surface'
-              }`}
-            >
-              Hesap Oluştur
-            </button>
-          </div>
+          {/* Tab Switcher & Headers */}
+          {activeTab !== 'forgot' ? (
+            <div className="flex gap-2 mb-8 bg-surface-container-high p-1 rounded-2xl w-max">
+              <button 
+                type="button"
+                onClick={() => setActiveTab('login')}
+                className={`px-6 py-2.5 rounded-xl font-bold transition-all cursor-pointer ${
+                  activeTab === 'login' 
+                    ? 'bg-surface-container-lowest shadow-sm text-primary' 
+                    : 'text-secondary hover:text-on-surface'
+                }`}
+              >
+                Giriş Yap
+              </button>
+              <button 
+                type="button"
+                onClick={() => setActiveTab('register')}
+                className={`px-6 py-2.5 rounded-xl font-bold transition-all cursor-pointer ${
+                  activeTab === 'register' 
+                    ? 'bg-surface-container-lowest shadow-sm text-primary' 
+                    : 'text-secondary hover:text-on-surface'
+                }`}
+              >
+                Hesap Oluştur
+              </button>
+            </div>
+          ) : (
+            <div className="mb-8">
+              <h2 className="text-2xl font-extrabold text-on-surface mb-2">Parolanızı mı unuttunuz?</h2>
+              <p className="text-secondary text-base">Endişelenmeyin. Kayıtlı e-posta adresinizi girin, size bir sıfırlama bağlantısı gönderelim.</p>
+            </div>
+          )}
 
           {/* Form */}
-          <div className="bg-surface-container-lowest p-8 rounded-[2rem] shadow-[0_12px_40px_rgba(24,28,30,0.06)]">
+          <form onSubmit={handleSubmit} className="bg-surface-container-lowest p-8 rounded-[2rem] shadow-[0_12px_40px_rgba(24,28,30,0.06)]">
             {activeTab === 'register' && (
               <div className="mb-6">
                 <label className="block text-sm font-bold text-on-surface mb-2">Ad Soyad</label>
@@ -84,33 +101,53 @@ const Auth = () => {
               </div>
             </div>
 
-            <div className="mb-8">
-              <label className="block text-sm font-bold text-on-surface mb-2">Parola</label>
-              <div className={`transition-all duration-300 relative bg-surface-container rounded-xl flex items-center ${
-                focusedInput === 'password' ? 'ring-2 ring-primary border-primary/20' : 'border border-outline-variant/15'
-              }`}>
-                <span className="material-symbols-outlined text-secondary ml-4">lock</span>
-                <input 
-                  type="password" 
-                  placeholder="••••••••"
-                  className="w-full bg-transparent border-none outline-none px-4 py-3 text-on-surface placeholder:text-outline"
-                  onFocus={() => setFocusedInput('password')}
-                  onBlur={() => setFocusedInput('')}
-                />
-              </div>
-              {activeTab === 'login' && (
-                <div className="text-right mt-2">
-                  <a href="#" className="text-sm font-semibold text-primary hover:text-primary-container transition-colors">
-                    Parolamı unuttum
-                  </a>
+            {activeTab !== 'forgot' && (
+              <div className="mb-8">
+                <label className="block text-sm font-bold text-on-surface mb-2">Parola</label>
+                <div className={`transition-all duration-300 relative bg-surface-container rounded-xl flex items-center pr-4 ${
+                  focusedInput === 'password' ? 'ring-2 ring-primary border-primary/20' : 'border border-outline-variant/15'
+                }`}>
+                  <span className="material-symbols-outlined text-secondary ml-4">lock</span>
+                  <input 
+                    type={showPassword ? "text" : "password"} 
+                    placeholder="••••••••"
+                    className="w-full bg-transparent border-none outline-none px-4 py-3 text-on-surface placeholder:text-outline"
+                    onFocus={() => setFocusedInput('password')}
+                    onBlur={() => setFocusedInput('')}
+                  />
+                  <button 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-secondary hover:text-primary transition-colors flex items-center justify-center cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined">
+                      {showPassword ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
                 </div>
-              )}
-            </div>
+                {activeTab === 'login' && (
+                  <div className="text-right mt-2">
+                    <button type="button" onClick={() => setActiveTab('forgot')} className="text-sm font-semibold text-primary hover:text-primary-container transition-colors cursor-pointer">
+                      Parolamı unuttum
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
 
-            <button className="w-full primary-gradient text-white px-6 py-4 rounded-xl text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">
-              {activeTab === 'login' ? 'Sisteme Giriş Yap' : 'Kayıt İşlemini Tamamla'}
+            <button type="submit" className="w-full primary-gradient text-white px-6 py-4 rounded-xl text-lg font-bold shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform cursor-pointer mb-4">
+              {activeTab === 'login' ? 'Sisteme Giriş Yap' : activeTab === 'register' ? 'Kayıt İşlemini Tamamla' : 'Sıfırlama Bağlantısı Gönder'}
             </button>
-          </div>
+
+            {activeTab === 'forgot' && (
+              <div className="text-center mt-2">
+                <button type="button" onClick={() => setActiveTab('login')} className="text-sm font-bold text-secondary hover:text-primary transition-colors cursor-pointer inline-flex items-center gap-2">
+                  <span className="material-symbols-outlined text-sm">arrow_back</span>
+                  Giriş ekranına dön
+                </button>
+              </div>
+            )}
+          </form>
 
         </div>
       </div>

@@ -29,7 +29,7 @@ const Methodology = () => {
           <h2 className="text-3xl font-bold mb-6 font-headline">1. Gelişmiş Bilgi Getirimi (RAG) Nedir?</h2>
           <p className="text-lg text-secondary leading-relaxed mb-8 font-body">
             Geleneksel Büyük Dil Modelleri (LLM), eğitildikleri veri setleriyle sınırlıdır ve güncel kurumsal regülasyonlara her zaman vakıf olamazlar. 
-            <strong> Cognitive Canvas </strong> sisteminde kullanılan RAG teknolojisi, yapay zekanın önce güncel TÜBİTAK ve KOSGEB belgelerinden ilgili kısımları arayıp (Retrieval) bulmasını, 
+            <strong> GrantInsight AI </strong> sisteminde kullanılan RAG teknolojisi, yapay zekanın önce güncel TÜBİTAK ve KOSGEB belgelerinden ilgili kısımları arayıp (Retrieval) bulmasını, 
             ardından bu spesifik ve doğrulanmış bağlamı kullanarak cevap veya puan (Generation) üretmesini sağlar.
           </p>
 
@@ -63,7 +63,7 @@ const Methodology = () => {
           <h2 className="text-3xl font-bold mb-6 font-headline">2. Neden Vector Tabanlı Benzerlik Tespiti?</h2>
           <p className="text-lg text-secondary leading-relaxed mb-8 font-body">
             Kelime kelimesine kopyalama (intihal) günümüzde kolayca maskelenebilir (örneğin kelimelerin eş anlamlılarıyla değiştirilmesi). 
-            Vektör tabanlı matematiksel modelleme, kelimelerin cümle içindeki <em>anlamını</em> ölçer. Böylece cümlelerin kelimeleri tamamen değiştirilse dahi arkasındaki fikir çalıntıysa Cognitive Canvas bunu tespit edebilir.
+            Vektör tabanlı matematiksel modelleme, kelimelerin cümle içindeki <em>anlamını</em> ölçer. Böylece cümlelerin kelimeleri tamamen değiştirilse dahi arkasındaki fikir çalıntıysa GrantInsight AI bunu tespit edebilir.
           </p>
 
           <h2 className="text-3xl font-bold mb-6 font-headline">3. Tarafsızlık ve İnsan Hatalarının Giderilmesi</h2>

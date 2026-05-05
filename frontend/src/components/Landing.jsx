@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => (
@@ -83,7 +83,7 @@ const FeaturesSection = () => (
     <div className="max-w-7xl mx-auto">
       <div className="mb-24 text-center max-w-3xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Kurumsal Titizlik İçin Tasarlandı</h2>
-        <p className="text-lg text-secondary">Cognitive Canvas sadece bir araç değil; akademik teklifleri derin bir bağlamsal anlayışla yorumlayan dijital bir küratördür.</p>
+        <p className="text-lg text-secondary">GrantInsight AI sadece bir araç değil; akademik teklifleri derin bir bağlamsal anlayışla yorumlayan dijital bir küratördür.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-32">
@@ -116,7 +116,7 @@ const FeaturesSection = () => (
           <span className="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Bilişsel Mantık</span>
           <h3 className="text-3xl font-bold mb-6">Gelişmiş Benzerlik Tespiti</h3>
           <p className="text-lg text-secondary mb-8 leading-relaxed">
-            Akademik dürüstlüğü korumak her şeyden önemlidir. Cognitive Canvas, birden fazla dil ve disiplin arasındaki kavramsal örtüşmeleri ve proje benzerliklerini belirlemek için vektör modeli kullanarak, basit kelime eşleştirmesinin çok ötesine geçer.
+            Akademik dürüstlüğü korumak her şeyden önemlidir. GrantInsight AI, birden fazla dil ve disiplin arasındaki kavramsal örtüşmeleri ve proje benzerliklerini belirlemek için vektör modeli kullanarak, basit kelime eşleştirmesinin çok ötesine geçer.
           </p>
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-surface-container-low p-6 rounded-2xl">
@@ -139,32 +139,89 @@ const FeaturesSection = () => (
   </section>
 );
 
-const CTASection = () => (
-  <section className="px-8 py-24">
-    <div className="max-w-7xl mx-auto">
-      <div className="primary-gradient rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
-        <div className="relative z-10">
-          <h2 className="text-white text-4xl md:text-6xl font-extrabold mb-8">Akademik Etkinizi Artırmaya Hazır Mısınız?</h2>
-          <p className="text-primary-fixed text-xl mb-12 max-w-2xl mx-auto">
-            Hibe iş akışlarını kolaylaştırmak ve en yüksek standartlarda değerlendirme sağlamak için Cognitive Canvas'ı kullanan lider kurumların arasına katılın.
-          </p>
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <Link to="/platform">
-              <button className="bg-white text-primary px-10 py-5 rounded-2xl text-xl font-black shadow-2xl hover:bg-surface-container-lowest transition-all cursor-pointer">
-                Projenize Başlayın
+const CTASection = () => {
+  const [showIntro, setShowIntro] = useState(false);
+
+  return (
+    <section className="px-8 py-24">
+      <div className="max-w-7xl mx-auto">
+        <div className="primary-gradient rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
+          <div className="relative z-10">
+            <h2 className="text-white text-4xl md:text-6xl font-extrabold mb-8">Akademik Etkinizi Artırmaya Hazır Mısınız?</h2>
+            <p className="text-primary-fixed text-xl mb-12 max-w-2xl mx-auto">
+              Hibe iş akışlarını kolaylaştırmak ve en yüksek standartlarda değerlendirme sağlamak için GrantInsight AI'ı kullanan lider kurumların arasına katılın.
+            </p>
+            <div className="flex flex-col md:flex-row justify-center gap-6">
+              <Link to="/platform">
+                <button className="bg-white text-primary px-10 py-5 rounded-2xl text-xl font-black shadow-2xl hover:bg-surface-container-lowest transition-all cursor-pointer">
+                  Projenize Başlayın
+                </button>
+              </Link>
+              <button 
+                onClick={() => setShowIntro(!showIntro)}
+                className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/10 transition-all cursor-pointer"
+              >
+                {showIntro ? 'Tanıtımı Gizle' : 'Ücretsiz Tanıtım Alın'}
               </button>
-            </Link>
-            <button className="border-2 border-white/30 text-white px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/10 transition-all cursor-pointer">
-              Demo Talep Edin
-            </button>
+            </div>
           </div>
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
         </div>
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-tertiary-fixed/20 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+
+        {/* Comprehensive Project Introduction */}
+        {showIntro && (
+          <div className="bg-surface-container-lowest p-8 md:p-12 rounded-[3rem] shadow-xl border border-outline-variant/20 max-w-4xl mx-auto mt-12 transition-all">
+            <h3 className="text-3xl font-extrabold text-on-surface mb-6 flex items-center gap-3">
+              <span className="material-symbols-outlined text-primary text-4xl">lightbulb</span>
+              GrantInsight AI Nedir?
+            </h3>
+            
+            <div className="space-y-6 text-lg text-secondary leading-relaxed">
+              <p>
+                <strong>GrantInsight AI</strong>, Türkiye'nin ar-ge ve inovasyon ekosistemine özel olarak geliştirilmiş yapay zeka destekli hibe danışmanlık ve analiz asistanıdır. KOSGEB ve TÜBİTAK (Örn: 1501, 1507, 1001) projelerini hazırlayan girişimciler, KOBİ'ler ve akademisyenler için uçtan uca bir ön değerlendirme mekanizması sunar.
+              </p>
+              
+              <div className="bg-primary-fixed/20 p-8 rounded-3xl my-8 border border-primary/10">
+                <h4 className="font-bold text-on-surface mb-4 text-xl flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary">auto_awesome</span>
+                  Sistem Nasıl Çalışır?
+                </h4>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
+                    <div>
+                      <strong className="text-on-surface">RAG Teknolojisi ile Karşılaştırma:</strong> 
+                      <p className="text-sm mt-1">14.2 milyonu aşkın akademik makale ve güncel mevzuat veritabanıyla projenizin yenilikçilik (inovasyon) seviyesini tarar.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
+                    <div>
+                      <strong className="text-on-surface">Format ve Mantık Doğrulaması:</strong> 
+                      <p className="text-sm mt-1">Bütçe planınızın hedeflerinizle tutarlı olup olmadığını, teknik kapasite ile öngörülen sürenin uyuşup uyuşmadığını hesaplar.</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="material-symbols-outlined text-primary mt-1">check_circle</span>
+                    <div>
+                      <strong className="text-on-surface">Risk ve Eksik Tespiti:</strong> 
+                      <p className="text-sm mt-1">Tedarik zinciri, ticari fizibilite ve proje yönetimi gibi kritik faktörlerdeki eksikleri uzman bir hakem gözüyle tespit edip revize önerileri sunar.</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <p>
+                Aylarınızı harcadığınız projenizi resmi kurumlara göndermeden önce risksiz bir <strong>"Sandbox" (Ön Filtre)</strong> ortamında test edin. Amacımız; basit hatalardan kaynaklanan red oranlarını en aza indirmek ve ülkemizdeki yenilikçi fikirlerin başarıya ulaşma hızını artırmaktır.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 function Landing() {
   return (
