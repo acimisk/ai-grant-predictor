@@ -2,47 +2,47 @@ import os
 import re
 import json
 import uvicorn
+import requests
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from pymongo import MongoClient
 from sentence_transformers import SentenceTransformer
-from google import genai
 
 load_dotenv()
 
-# --- Sistem Sabitleri ve API Ayarları ---
+# --- Ayarlar ---
 MONGO_URI = os.getenv("MONGO_URI")
 DB_NAME = os.getenv("DB_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 INDEX_NAME = "vector_index"
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-if not GOOGLE_API_KEY:
-    raise RuntimeError("[-] HATA: .env dosyasında GOOGLE_API_KEY bulunamadı!")
-
-# Gemini API Yeni Nesil İstemci
-ai_client = genai.Client(api_key=GOOGLE_API_KEY)
-
-# --- FastAPI Uygulaması ---
 app = FastAPI(
-    title="TÜBİTAK/KOSGEB Karar Destek API",
-    description="LLM ve RAG tabanlı asenkron proje ön değerlendirme sistemi.",
-    version="1.1.0"
+    title="GrantInsight RAG API (Ollama Edition)",
+    description="Yerel Llama 3 motoru ile TÜBİTAK proje değerlendirme sistemi.",
+    version="2.0.0"
 )
 
-print("[SİSTEM] Vektör modeli (SentenceTransformer) belleğe alınıyor...")
-embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
+# React bağlantısı için CORS (Burası kritik!)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Swagger dokümantasyonu için şema (kullanılmasa da durabilir)
-class ProjectApplication(BaseModel):
-    project_text: str
+print("[SİSTEM] Vektör modeli belleğe alınıyor...")
+# Senin veritabanına veri basarken kullandığın model neyse onu yaz (L12-v2 daha iyidir)
+embedding_model = SentenceTransformer('sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2')
 
 def get_relevant_context(query_text, top_k=3):
     """MongoDB üzerinden vektör araması yapar."""
     try:
         db_client = MongoClient(MONGO_URI)
-        collection = db_client[DB_NAME][COLLECTION_NAME]
+        db = db_client[DB_NAME]
+        collection = db[COLLECTION_NAME]
         query_vector = embedding_model.encode(query_text).tolist()
 
         pipeline = [
@@ -58,83 +58,71 @@ def get_relevant_context(query_text, top_k=3):
             {
                 "$project": {
                     "_id": 0,
-                    "text_content": 1
+                    "title": 1,
+                    "abstract": 1,
+                    "score": {"$meta": "vectorSearchScore"}
                 }
             }
         ]
-        results = list(collection.aggregate(pipeline))
-        return [res['text_content'] for res in results]
+        return list(collection.aggregate(pipeline))
     except Exception as e:
-        print(f"[HATA] Veritabanı araması başarısız: {e}")
+        print(f"[HATA] Veritabanı araması: {e}")
         return []
 
-@app.post("/evaluate")
+@app.post("/api/analyze")
 async def evaluate_project(request: Request):
-    """Gelen veriyi temizleyip analiz eden asenkron endpoint."""
     try:
-        # 1. Ham gövdeyi (body) al ve temizle
-        raw_body = await request.body()
-        body_str = raw_body.decode("utf-8")
-        
-        # JSON decode hatasına neden olan kontrol karakterlerini uçur
-        safe_body_str = re.sub(r'[\x00-\x1f\x7f-\x9f]', '', body_str)
-        
-        # JSON'a çevir
-        data = json.loads(safe_body_str)
-        input_text = data.get("project_text", "")
+        # 1. Gelen JSON verisini al
+        data = await request.json()
+        input_text = data.get("query", "") # React'tan 'query' olarak gelecek
         
         if not input_text:
-            raise ValueError("project_text alanı boş olamaz.")
-            
-    except Exception as e:
-        print(f"[HATA] JSON İşleme Hatası: {e}")
-        raise HTTPException(status_code=400, detail="JSON formatı bozuk veya geçersiz karakter içeriyor.")
+            raise HTTPException(status_code=400, detail="Sorgu metni boş olamaz.")
 
-    # 2. Metin Temizliği (Enter, Tab ve Tırnak karakterleri)
-    clean_text = input_text.replace('\n', ' ').replace('\r', ' ').replace('\t', ' ')
-    clean_text = " ".join(clean_text.split())
+        # 2. RAG (Bağlam Getirme)
+        results = get_relevant_context(input_text)
+        if not results:
+            context_for_llm = "Referans makale bulunamadı."
+        else:
+            context_for_llm = "\n\n".join([f"Başlık: {r['title']}\nÖzet: {r['abstract']}" for r in results])
 
-    if len(clean_text) < 50:
-        raise HTTPException(status_code=400, detail="Proje metni analiz için çok kısa.")
+        # 3. Ollama (Yerel Llama 3) Promptu
+        prompt = f"""
+        Sen kıdemli bir TÜBİTAK proje danışmanısın. Aşağıdaki akademik makaleleri kullanarak başvuruyu analiz et.
+        
+        [REFERANS MAKALE ÖZETLERİ]:
+        {context_for_llm}
 
-    # 3. RAG (Bağlam Getirme)
-    similar_projects_list = get_relevant_context(clean_text)
-    
-    if not similar_projects_list:
-        raise HTTPException(status_code=500, detail="Veritabanından referans projeler çekilemedi.")
+        [DEĞERLENDİRİLECEK BAŞVURU]:
+        {input_text}
 
-    context_for_llm = "\n\n---\n\n".join(similar_projects_list)
+        Lütfen TÜRKÇE olarak, profesyonel bir dille cevap ver.
+        """
 
-    # 4. Prompt Mühendisliği (Kısa ve Öz Rapor)
-    prompt = f"""
-    Sen TÜBİTAK/KOSGEB panelistisin. Aşağıdaki başvuruyu, referans makalelere dayanarak 
-    SADECE 3 MADDEDE ve TOPLAMDA 150 KELİMEYİ GEÇMEYECEK şekilde değerlendir.
-    
-    [REFERANS MAKALE PARÇALARI]:
-    {context_for_llm}
-
-    [DEĞERLENDİRİLECEK BAŞVURU]:
-    {clean_text}
-
-    Formatın tam olarak şu olsun (Dışına çıkma):
-    - ÖZGÜNLÜK: (Maksimum 2 cümle)
-    - KRİTİK EKSİK: (En önemli 1 eksik)
-    - TAVSİYE: (Projeyi kurtaracak en önemli tavsiye)
-    """
-
-    # 5. Gemini 2.5 Flash ile Üretim
-    try:
-        response = ai_client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
+        # 4. Ollama İsteği
+        ollama_response = requests.post("http://localhost:11434/api/generate", 
+            json={
+                "model": "llama3:latest",
+                "prompt": prompt,
+                "stream": False
+            }
         )
+        
+        ai_message = ollama_response.json().get("response", "Ollama yanıt veremedi.")
+
         return {
             "status": "success",
-            "ai_evaluation_report": response.text,
-            "retrieved_similar_projects": similar_projects_list
+            "response": ai_message,
+            "sources": [{"title": r['title'], "score": round(r['score'], 4)} for r in results]
         }
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"LLM hatası: {str(e)}")
+        print(f"[HATA]: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/")
+def read_root():
+    return {"status": "GrantInsight RAG API is live with Ollama Support"}
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

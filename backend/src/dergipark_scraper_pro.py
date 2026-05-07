@@ -33,13 +33,13 @@ def scrape_with_bypass():
         # Ana sayfada Cloudflare onayı için bekleme
         driver.get("https://dergipark.org.tr/tr/")
         print("[SİSTEM] Siteye girildi. Eğer Captcha çıkarsa ELLE ONAYLA! (20 sn süren var)")
-        time.sleep(20)
+        time.sleep(10)
         
         page = 1
         while page <= 10:
             url = f"https://dergipark.org.tr/tr/search?q={search_query}&section=article&page={page}"
             driver.get(url)
-            time.sleep(random.uniform(6, 10))
+            time.sleep(random.uniform(5, 10))
             
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             # Linkleri topla
@@ -63,7 +63,7 @@ def scrape_with_bypass():
 
                 print(f"  [GİRİLİYOR] Makale Sayfası: {doc_id}")
                 driver.get(article_url)
-                time.sleep(random.uniform(5, 8))
+                time.sleep(random.uniform(4, 7))
                 
                 # PDF Linkini bul
                 article_soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -79,7 +79,7 @@ def scrape_with_bypass():
                     print(f"  [İNDİRİLİYOR] {doc_id} ...")
                     try:
                         driver.get(pdf_url) 
-                        time.sleep(7) # İndirme işlemi için bekle
+                        time.sleep(5) # İndirme işlemi için bekle
                     except Exception as e:
                         print(f"  [HATA] {doc_id} indirilirken sorun çıktı: {e}")
                 else:
@@ -87,7 +87,7 @@ def scrape_with_bypass():
             
             print(f"\n[SİSTEM] Sayfa {page} bitti. Sonraki sayfaya geçiliyor...\n")
             page += 1
-            time.sleep(random.uniform(10, 15)) 
+            time.sleep(random.uniform(5, 8)) 
             
     finally:
         print("[SİSTEM] Tarayıcı kapatılıyor. İndirilenleri kontrol et.")
